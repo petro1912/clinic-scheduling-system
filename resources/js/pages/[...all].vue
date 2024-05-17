@@ -1,112 +1,48 @@
 <script setup>
-import { themeConfig } from '@themeConfig'
+import page404 from '@images/pages/404.png'
+import miscMaskDark from '@images/pages/misc-mask-dark.png'
+import miscMaskLight from '@images/pages/misc-mask-light.png'
+import { useGenerateImageVariant } from '@core/composable/useGenerateImageVariant'
 
-// Components
-import NavBarI18n from '@/layouts/components/NavBarI18n.vue'
-import NavBarNotifications from '@/layouts/components/NavBarNotifications.vue'
-import NavbarShortcuts from '@/layouts/components/NavbarShortcuts.vue'
-import NavbarThemeSwitcher from '@/layouts/components/NavbarThemeSwitcher.vue'
-import UserProfile from '@/layouts/components/UserProfile.vue'
-import { VNodeRenderer } from '@layouts/components/VNodeRenderer'
-
-import FAQ from '@/views/landing/faq.vue'
-import Schedule from '@/views/landing/schedule.vue'
-import Services from '@/views/landing/services.vue'
+const authThemeMask = useGenerateImageVariant(miscMaskLight, miscMaskDark)
 </script>
 
 <template>
-  <div class="layout-wrapper layout-nav-type-horizontal layout-navbar-sticky layout-footer-static layout-content-width-boxed">
-    <div
-      class="layout-navbar-and-nav-container py-2"
-      :class="header-blur"
-    >
-      <!-- 👉 Navbar -->
-      <div class="layout-navbar">
-        <div class="navbar-content-container">
-          <RouterLink
-            to="/"
-            class="app-logo d-flex align-center gap-x-3"
-          >
-            <VNodeRenderer :nodes="themeConfig.app.logo" />
-
-            <h1 class="app-title font-weight-bold leading-normal text-xl text-capitalize">
-              {{ themeConfig.app.title }}
-            </h1>
-          </RouterLink>
-          <VSpacer />
-
-          <NavBarI18n class="me-1" />
-          <NavbarThemeSwitcher class="me-1" />
-          <NavbarShortcuts class="me-1" />
-          <NavBarNotifications class="me-2" />
-          <UserProfile />
-        </div>
-      </div>
+  <div class="misc-wrapper">
+    <div class="misc-center-content text-center mb-12">
+      <!-- 👉 Title and subtitle -->
+      <h4 class="text-h4 font-weight-medium mb-3">
+        Oops, page is not found! 🔐
+      </h4>
+      <VBtn to="/reservation">
+        Back to Home
+      </VBtn>
     </div>
-    <main class="layout-page-content">
-      <Services />
-      <Schedule />
-      <FAQ />
-    </main>
+
+    <!-- 👉 Image -->
+    <div class="misc-avatar w-100 text-center">
+      <VImg
+        :src="page404"
+        alt="Coming Soon"
+        :max-width="170"
+        class="mx-auto"
+      />
+    </div>
+
+    <VImg
+      :src="authThemeMask"
+      class="misc-footer-img d-none d-md-block"
+    />
   </div>
 </template>
 
 <style lang="scss">
-.layout-wrapper.layout-nav-type-horizontal {
-    .layout-navbar {
-        border-block-end: none !important;
-    }
-} 
+@use "@core-scss/template/pages/misc.scss";
 </style>
-
-<style lang="scss">
-@use "@core-scss/template/libs/full-calendar";
-
-.calendars-checkbox {
-  .v-label {
-    color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity));
-    opacity: var(--v-high-emphasis-opacity);
-  }
-}
-
-.calendar-add-event-drawer {
-  &.v-navigation-drawer:not(.v-navigation-drawer--temporary) {
-    border-end-start-radius: 0.375rem;
-    border-start-start-radius: 0.375rem;
-  }
-}
-
-.border-thin {
-    border-right-width: thin;
-    border-color: rgba(var(--v-border-color), var(--v-border-opacity));
-    border-style: solid;
-}
-
-.calendar-date-picker {
-  display: none;
-
-  +.flatpickr-input {
-    +.flatpickr-calendar.inline {
-      border: none;
-      box-shadow: none;
-
-      .flatpickr-months {
-        border-block-end: none;
-      }
-    }
-  }
-
-  & ~ .flatpickr-calendar .flatpickr-weekdays {
-    margin-block: 0 4px;
-  }
-}
-</style>
-
 
 <route lang="yaml">
-    meta:
-      layout: blank
-      action: read
-      subject: Auth
-      redirectIfLoggedIn: false
+meta:
+  layout: blank
+  action: read
+  subject: Auth
 </route>

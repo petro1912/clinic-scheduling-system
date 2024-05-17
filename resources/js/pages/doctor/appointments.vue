@@ -36,17 +36,22 @@ const headers = [
 
 const data = ref([])
 
-const createLink = item => {
-  
-  const index = data.value.indexOf(item)
+const loading = ref(false);
 
+const createLink = item => {
+  loading.value = true;
   axios.post('/doctor/meeting', { id: item.id })
     .then(r => {
       const { status, schedules } = r.data
-      if (status == "success")
+      if (status === "success")
         data.value = schedules
+
+      loading.value = false;
     })
-} 
+  .catch(() => {
+    loading.value = false;
+  })
+}
 
 onMounted(() => {
   axios.get('/doctor/schedules')
@@ -56,7 +61,7 @@ onMounted(() => {
 })
 </script>
 
-<template>  
+<template>
   <VRow>
     <VCol cols="12">
       <VCard>
@@ -201,9 +206,16 @@ onMounted(() => {
                         <VBtn
                           v-if="slotProps.item.raw.link == '' || slotProps.item.raw.link == null"
                           block
+                          :disabled="loading"
                           @click="createLink(slotProps.item.raw)"
                         >
-                          Create Link
+                          <VProgressCircular
+                            v-if="loading"
+                            :size="25"
+                            color="default"
+                            class="me-1"
+                            indeterminate
+                          /> Create Link
                         </VBtn>
                         <div v-else>
                           <a :href="slotProps.item.raw.link">Join to Zoom meeting</a>

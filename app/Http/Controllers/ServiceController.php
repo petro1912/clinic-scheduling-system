@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Service;
+use App\Models\User;
 use App\Models\Availability;
 use App\Models\Schedule;
 
@@ -34,7 +35,7 @@ class ServiceController extends Controller
     public function getAllServicesWithAvailability(Request $request)
     {
         $today = now()->toDateString();
-        $services = Service::all();
+        $services = Service::with('doctor')->get();
         $availability = Availability::all()->first();
         $schedules = Schedule::where('booked_date', '>=', $today)->get();
 
@@ -52,8 +53,7 @@ class ServiceController extends Controller
     */
     public function getDoctorServices(Request $request)
     {
-        $doctor = Auth::user();
-        $services = Service::where('user_id', $doctor->id)->get();
+        $services = Service::all();
 
         return response()->json([
             'services' =>$services
@@ -63,7 +63,13 @@ class ServiceController extends Controller
     public function updateDoctorService(Request $request)
     {
         $id = $request->id;
-        $doctor = Auth::user();
+        $doctor = User::where('role', 'doctor')->first();
+
+        if (!isset($doctor)){
+            return response()->json([
+                'message' => 'Please add doctor first in users menu.'
+            ], 400);
+        }
         
         if ($id == -1) {
             $service = new Service();

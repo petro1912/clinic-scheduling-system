@@ -5,7 +5,7 @@ const dates = [
   'Monday',
   'Tuesday',
   'Wednesday',
-  'Thusday',
+  'Thursday',
   'Friday',
   'Saturday',
   'Sunday',
@@ -16,9 +16,9 @@ const isSaveSuccess = ref(false)
 
 const selectedDate = ref([
   'Monday',
-  'Thusday',
   'Tuesday',
   'Wednesday',
+  'Thursday',
 ])
 
 const start_time = ref('')

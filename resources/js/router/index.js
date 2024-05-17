@@ -12,17 +12,20 @@ const router = createRouter({
     {
       path: '/',
       redirect: to => {
+        const isLoggedIn = isUserLoggedIn();
         const userData = JSON.parse(localStorage.getItem('userData') || '{}')
         const userRole = (userData && userData.role) ? userData.role : null
-        
-        if (userRole === 'admin')
-          return { name: 'admin-account' }
-        if (userRole === 'doctor')
-          return { name: 'doctor-availability' }
-        if (userRole === 'patient')
-          return { name: 'patient-appointments' }
-        
-        return { name: 'login', query: to.query }
+
+        if (isLoggedIn) {
+          if (userRole === 'admin')
+            return { name: 'admin-account' }
+          if (userRole === 'doctor')
+            return { name: 'doctor-availability' }
+          if (userRole === 'patient')
+            return { name: 'patient-appointments' }
+        }
+
+        return { name: 'login', query: to.query };
       },
     },
     {

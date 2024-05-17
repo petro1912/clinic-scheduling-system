@@ -14,6 +14,10 @@ const props = defineProps({
     type: null,
     required: true,
   },
+  loading: {
+    type: Boolean,
+    required: false
+  }
 })
 
 const emit = defineEmits([
@@ -142,8 +146,15 @@ watch(() => props.currentStep, updateAddressData)
                 <VBtn
                   class="me-3"
                   @click="nextStep"
+                  :disabled="props.loading"
                 >
-                  Checkout
+                  <VProgressCircular
+                    v-if="props.loading"
+                    :size="25"
+                    color="default"
+                    class="me-1"
+                    indeterminate
+                  /> Checkout
                 </VBtn>
                 <VBtn
                   variant="tonal"
@@ -181,7 +192,7 @@ watch(() => props.currentStep, updateAddressData)
             <VDivider />
 
             <VCardText>
-              <div class="d-flex justify-space-between text-base mb-2">
+              <div class="d-flex justify-space-between text-base mb-4">
                 <span class="text-high-emphasis font-weight-medium">Total</span>
                 <span>${{ scheduleDataLocal.service.price }}</span>
               </div>
@@ -193,19 +204,19 @@ watch(() => props.currentStep, updateAddressData)
                   class="text-capitalize"
                   label
                 >
-                  Address of the Professional 
+                  {{ scheduleDataLocal.service.doctor.name }}
                 </VChip>
               </div>
-             
-              <h6 class="text-base font-weight-medium">
-                Professional Name
-              </h6>
-              <p class="text-base mb-1">
-                Site Address : Phone Number of Professional 
-              </p>
-              <p class="text-base mb-3">
-                Mobile : Phone Number of Professional 
-              </p>
+              <div class="d-flex justify-space-between text-base mb-4">
+                <span class="text-high-emphasis font-weight-medium">Email:</span>
+                <VChip
+                  color="primary"
+                  class="text-capitalize"
+                  label
+                >
+                  {{ scheduleDataLocal.service.doctor.email }}
+                </VChip>
+              </div>
             </VCardText>
           </VCard>
         </VCol>

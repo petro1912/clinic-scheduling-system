@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Reserved;
 use App\Models\User;
 use App\Models\Service;
 use App\Models\Schedule;
 use App\Models\BasicHealth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
@@ -19,7 +21,10 @@ use Illuminate\Http\Request;
 class ScheduleController extends Controller
 {
     public function register(Request $request) {
-        $requestData = $request->all();
+        $cardNumer = $request->cardNumber;
+        $cardHoler = $request->cardHolder;
+        $cardExpiry = $request->cardExpiry;
+        $cardCVV = $request->cardCVV;
         
         $clinicFile = $request->file('clinicFiles');
         $isMedicalOrder = $request->isMedicalOrder;
@@ -46,7 +51,7 @@ class ScheduleController extends Controller
             "dob" => $request->dob,
             "idType" => $request->idType,
             "idNumber" => $request->idNumber,
-            "password" => $request->password,
+            "password" => bcrypt($request->password),
             "role"=> "patient"
         ]);
 
@@ -129,12 +134,19 @@ class ScheduleController extends Controller
                 'approval_type' => 0, // 0 => Automatically Approve, 1 => Manually Approve, 2 => No Registration Required
             ],
         ]);
-
-        Log::info("meetings", $meetings);
         
         if ($meetings['status']) {
             $schedule->link = $meetings['data']['join_url'];
             $schedule->save();
+
+            // send mail
+            $mail = $schedule->patient->email;
+            $name = $schedule->patient->name;
+
+            Mail::to($mail)->send(new Reserved([
+                'name' => $name,
+                'link' => $meetings['data']['join_url']
+            ]));
 
             $schedules = Schedule::with(['service', 'patient', 'health'])->get();
         

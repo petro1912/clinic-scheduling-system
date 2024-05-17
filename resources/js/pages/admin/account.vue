@@ -154,11 +154,11 @@ onMounted(() => {
             
             <tbody v-if="professionals">
               <tr
-                v-for="item in professionals"
+                v-for="(item, index) in professionals"
                 :key="item.id"
               >
                 <td>
-                  {{ item.id }}
+                  {{ index + 1 }}
                 </td>
                 <td class="text-center">
                   {{ item.name }}
@@ -191,9 +191,6 @@ onMounted(() => {
                   <div class="d-flex gap-1 justify-center">
                     <IconBtn @click="editItem(item)">
                       <VIcon icon="mdi-pencil-outline" />
-                    </IconBtn>
-                    <IconBtn @click="deleteItem(item)">
-                      <VIcon icon="mdi-delete-outline" />
                     </IconBtn>
                   </div>
                 </td>
@@ -265,7 +262,7 @@ onMounted(() => {
                       >
                         <AppTextField
                           v-model="editedItem.registerNumber"
-                          label="Número del Documento"
+                          label="Número de registro medico"
                         />
                       </VCol>
 

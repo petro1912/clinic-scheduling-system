@@ -67,11 +67,13 @@ const isError = ref(false)
 const errorMsg = ref(null)
 
 const cardData = ref({
-  cardNumber: "4051885600446623",
-  cardHolder: "Igor Ming",
-  cardExpiry: "08/28",
-  cardCVV: "123",
-})
+  cardNumber: "",
+  cardHolder: "",
+  cardExpiry: "",
+  cardCVV: "",
+});
+
+const loading = ref(false);
 
 const requiredInformation = (param, key) => {
   const required = requiredValidatorWithKey(param, key)
@@ -86,11 +88,10 @@ const requiredInformation = (param, key) => {
 }
 
 const submitAppointment = () => {
-
   const _checkout = { ...scheduleData.value }
 
-  if (_checkout.service == null || _checkout.service == undefined) {
-    errorMsg.value = "You must select a service"
+  if (_checkout.service == null) {
+    errorMsg.value = "You must select a service."
     isError.value = true
     
     return
@@ -133,15 +134,15 @@ const submitAppointment = () => {
     return
   }
 
-  if (!param.isMedicalOrder && param.clinicFiles.length == 0) {
-    errorMsg.value = "You must attach the document for clinic result"
+  if (!param.isMedicalOrder && param.clinicFiles.length === 0) {
+    errorMsg.value = "You must attach the document for clinic result."
     isError.value = true
     
     return
   }
 
-  if (param.password != param.confirm_password) {
-    errorMsg.value = "Password confirmation mismatch"
+  if (param.password !== param.confirm_password) {
+    errorMsg.value = "Password confirmation mismatch."
     isError.value = true
     
     return
@@ -150,24 +151,29 @@ const submitAppointment = () => {
   const formData = new FormData()
 
   Object.keys(param).forEach(key => {
-    if (key == 'clinicFiles')
+    if (key === 'clinicFiles')
       formData.append(key, param[key][0])
     else
       formData.append(key, param[key])
   })
 
+  loading.value = true;
   axios.post('/schedule/register', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
   })
     .then(r => {
-      const { status } = r.data
-      if (status == "success") {
-        router.replace("/login")
+      loading.value = false;
+      const { status } = r.data;
+      if (status === "success") {
+        router.replace("/login");
       }
     })
-
+  .catch(e => {
+    loading.value = false;
+    console.log(e.toString());
+  });
 }
 
 defineExpose({
@@ -178,7 +184,7 @@ onMounted(() => {
   axios.get('/services-schedules')
     .then(r => {
       const { services, availability, schedules } = r.data
-      for (var service of services) {
+      for (let service of services) {
         service.value = service
       }
 
@@ -248,6 +254,7 @@ const currentStep = ref(0)
               v-model:current-step="currentStep"
               v-model:schedule-data="scheduleData"
               v-model:card-data="cardData"
+              v-model:loading="loading"
               @submit-appointment="submitAppointment"
             />
           </VWindowItem>

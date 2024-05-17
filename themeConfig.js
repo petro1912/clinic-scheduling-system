@@ -8,7 +8,7 @@ import { AppContentLayoutNav, ContentWidth, FooterType, NavbarType } from '@layo
 
 export const { themeConfig, layoutConfig } = defineThemeConfig({
   app: {
-    title: 'Tele Medicina',
+    title: 'Telemedicina',
     logo: h('img', { src: '/logo.png', style: {width: '40px', height:'40px' } }),
     contentWidth: ContentWidth.Boxed,
     contentLayoutNav: AppContentLayoutNav.Vertical,

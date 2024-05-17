@@ -22,7 +22,7 @@ return new class extends Migration
                 'Monday',
                 'Tuesday',
                 'Wednesday',
-                'Thusday',
+                'Thursday',
                 'Friday',
                 'Saturday',
                 'Sunday'

@@ -1,12 +1,6 @@
 import admin from './admin'
-import appAndPages from './app-and-pages'
-import charts from './charts'
-import dashboard from './dashboard'
 import doctor from './doctor'
-import forms from './forms'
-import others from './others'
 import patient from './patient'
-import uiElements from './ui-elements'
 
 const userData = JSON.parse(localStorage.getItem('userData') || '{}')
 const userRole = (userData && userData.role) ? userData.role : null
@@ -24,11 +18,5 @@ case 'patient':
 }
 
 export default [
-  ...userRoutes, 
-  ...appAndPages, 
-  ...dashboard, 
-  ...uiElements, 
-  ...forms, 
-  ...charts, 
-  ...others,
+  ...userRoutes
 ]

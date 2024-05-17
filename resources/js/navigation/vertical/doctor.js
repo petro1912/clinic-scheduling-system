@@ -11,14 +11,8 @@ export default [
     to: 'doctor-services',
   },
   {
-    title: 'Appoinitments',
+    title: 'Appointments',
     icon: { icon: 'tabler-calendar' },
     to: 'doctor-appointments',
-  },
-  {
-    title: 'Records',
-    icon: { icon: 'tabler-id' },
-    to: 'doctor-records',
-  },
+  }
 ]
-  
