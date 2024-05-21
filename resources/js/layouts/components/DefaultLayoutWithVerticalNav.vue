@@ -1,5 +1,4 @@
 <script setup>
-import navItems from '@/navigation/vertical'
 import { useThemeConfig } from '@core/composable/useThemeConfig'
 
 // Components
@@ -13,9 +12,31 @@ import UserProfile from '@/layouts/components/UserProfile.vue'
 
 // @layouts plugin
 import { VerticalNavLayout } from '@layouts'
+import {onMounted} from "vue";
+import admin from "@/navigation/vertical/admin";
+import doctor from "@/navigation/vertical/doctor";
+import patient from "@/navigation/vertical/patient";
 
 const { appRouteTransition, isLessThanOverlayNavBreakpoint } = useThemeConfig()
-const { width: windowWidth } = useWindowSize()
+const { width: windowWidth } = useWindowSize();
+
+const navItems = ref([]);
+
+onMounted(() => {
+  const userData = JSON.parse(localStorage.getItem('userData') || '{}')
+  const userRole = (userData && userData.role) ? userData.role : null
+
+  switch (userRole) {
+    case 'admin':
+      navItems.value = [...admin, ...doctor]
+      break
+    case 'doctor':
+      navItems.value = [...doctor]
+      break
+    case 'patient':
+      navItems.value = [...patient]
+  }
+})
 </script>
 
 <template>
@@ -35,14 +56,9 @@ const { width: windowWidth } = useWindowSize()
           />
         </IconBtn>
 
-        <NavSearchBar class="ms-lg-n3" />
-
         <VSpacer />
 
-        <NavBarI18n class="me-1" />
         <NavbarThemeSwitcher class="me-1" />
-        <NavbarShortcuts class="me-1" />
-        <NavBarNotifications class="me-2" />
         <UserProfile />
       </div>
     </template>

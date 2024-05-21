@@ -13,10 +13,6 @@
 <body>
   <div id="app">
     <div id="loading-bg">
-      <div class="loading-logo">
-        <!-- SVG Logo -->
-        <img width="100" height="100" src="{{asset('logo.png')}}" />
-      </div>
       <div class=" loading">
         <div class="effect-1 effects"></div>
         <div class="effect-2 effects"></div>

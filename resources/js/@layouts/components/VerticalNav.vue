@@ -90,8 +90,8 @@ const handleNavScroll = evt => {
     <!-- 👉 Header -->
     <div class="nav-header">
       <slot name="nav-header">
-        <RouterLink
-          to="/"
+        <a
+          href="/"
           class="app-logo d-flex align-center gap-x-3 app-title-wrapper"
         >
           <VNodeRenderer :nodes="config.app.logo" />
@@ -104,7 +104,7 @@ const handleNavScroll = evt => {
               {{ config.app.title }}
             </h1>
           </Transition>
-        </RouterLink>
+        </a>
         <!-- 👉 Vertical nav actions -->
         <!-- Show toggle collapsible in >md and close button in <md -->
         <template v-if="!isLessThanOverlayNavBreakpoint(windowWidth)">

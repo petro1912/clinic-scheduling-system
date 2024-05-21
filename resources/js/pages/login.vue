@@ -29,29 +29,41 @@ const refVForm = ref()
 const email = ref('')
 const password = ref('')
 const rememberMe = ref(false)
+const invalidError = ref(null)
+const loading = ref(false);
 
 const login = () => {
+  loading.value = true;
   axios.post('/auth/login', {
     email: email.value,
     password: password.value,
   }).then(r => {
-    const { accessToken, userData } = r.data
+    loading.value = false;
+    // if status code is 200
+    if (r){
+      const { accessToken, userData } = r.data
 
-    const userAbilities = [
-      {
-        action: 'manage',
-        subject: 'all',
-      },
-    ]
+      const userAbilities = [
+        {
+          action: 'manage',
+          subject: 'all',
+        },
+      ]
 
-    localStorage.setItem('userAbilities', JSON.stringify(userAbilities))
-    ability.update(userAbilities)
-    localStorage.setItem('userData', JSON.stringify(userData))
-    localStorage.setItem('accessToken', accessToken)
+      localStorage.setItem('userAbilities', JSON.stringify(userAbilities))
+      ability.update(userAbilities)
+      localStorage.setItem('userData', JSON.stringify(userData))
+      localStorage.setItem('accessToken', accessToken)
 
-    // Redirect to `to` query if exist or redirect to index route
-    router.replace(route.query.to ? String(route.query.to) : '/')
+      // Redirect to `to` query if exist or redirect to index route
+      router.replace(route.query.to ? String(route.query.to) : '/')
+    }
+    // status code 401
+    else {
+      invalidError.value = "Invalid Credential";
+    }
   }).catch(e => {
+    loading.value = false;
     const { errors: formErrors } = e.response.data
 
     errors.value = formErrors
@@ -60,6 +72,7 @@ const login = () => {
 }
 
 const onSubmit = () => {
+  invalidError.value = null;
   refVForm.value?.validate().then(({ valid: isValid }) => {
     if (isValid)
       login()
@@ -103,10 +116,14 @@ const onSubmit = () => {
         class="mt-12 mt-sm-0 pa-4"
       >
         <VCardText>
-          <VNodeRenderer
-            :nodes="themeConfig.app.logo"
-            class="mb-6"
-          />
+          <a href="/" class="d-flex align-items-center align-center justify-center mb-6">
+            <VNodeRenderer
+              :nodes="themeConfig.app.logo"
+              class="me-1"
+            />
+
+            <h2 class="text-capitalize text-primary mt-1"> {{ themeConfig.app.title }} </h2>
+          </a>
 
           <h5 class="text-h5 mb-1">
             Welcome to <span class="text-capitalize text-primary"> {{ themeConfig.app.title }} </span>! 👋🏻
@@ -115,21 +132,15 @@ const onSubmit = () => {
             Please sign-in to your account and start the scheduling
           </p>
         </VCardText>
-        <!--
-          <VCardText>
+        <VCardText v-if="invalidError">
           <VAlert
-          color="primary"
-          variant="tonal"
+            color="error"
+            variant="tonal"
+            closable
           >
-          <p class="text-caption mb-2">
-          Admin Email: <strong>admin@demo.com</strong> / Pass: <strong>admin</strong>
-          </p>
-          <p class="text-caption mb-0">
-          Client Email: <strong>client@demo.com</strong> / Pass: <strong>client</strong>
-          </p>
+            {{invalidError}}
           </VAlert>
-          </VCardText> 
-        -->
+        </VCardText>
         <VCardText>
           <VForm
             ref="refVForm"
@@ -176,23 +187,17 @@ const onSubmit = () => {
                 <VBtn
                   block
                   type="submit"
+                  :disabled="loading"
                 >
+                  <VProgressCircular
+                    v-if="loading"
+                    :size="25"
+                    color="default"
+                    class="me-1"
+                    indeterminate
+                  />
                   Login
                 </VBtn>
-              </VCol>
-
-              <!-- create account -->
-              <VCol
-                cols="12"
-                class="text-center"
-              >
-                <span>New on our platform?</span>
-                <RouterLink
-                  class="text-primary ms-2"
-                  :to="{ name: 'register' }"
-                >
-                  Create an account
-                </RouterLink>
               </VCol>
             </VRow>
           </VForm>

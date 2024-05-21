@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Mobirise v5.9.13, a.mobirise.com">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-  <link rel="shortcut icon" href="assets/images/photo-1626709337033-ee12f78fcaaa.jpeg" type="image/x-icon">
+  <link rel="shortcut icon" href="{{assert('assets/images/photo-1626709337033-ee12f78fcaaa.jpeg')}}" type="image/x-icon">
   <meta name="description"
     content="Efficient clinical registration system with advanced scheduling capabilities for seamless patient management.">
   <title>Clinical Scheduling Solution</title>
@@ -30,21 +30,18 @@
 </head>
 
 <body>
-
   <section data-bs-version="5.1" class="menu menu2 cid-ucfBvxsyp5" once="menu" id="menu-5-ucfBvxsyp5">
-
-
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
       <div class="container">
         <div class="navbar-brand">
           <span class="navbar-logo">
             <a href="https://mobiri.se">
-              <img src="assets/images/photo-1626709337033-ee12f78fcaaa.jpeg" alt="Mobirise Website Builder"
+              <img src="{{asset('assets/images/photo-1626709337033-ee12f78fcaaa.jpeg')}}" alt="telemedica"
                 style="height: 4.3rem;">
             </a>
           </span>
           <span class="navbar-caption-wrap"><a class="navbar-caption text-info display-5"
-              href="#">TeleMedicina</a></span>
+              href=/">TeleMedicina</a></span>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse"
           data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent"
@@ -57,21 +54,8 @@
           </div>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
-            <li class="nav-item">
-              <a class="nav-link link text-black display-4" href="https://mobiri.se">Registration</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link link text-black display-4" href="https://mobiri.se"
-                aria-expanded="false">Scheduling</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link link text-black display-4" href="https://mobiri.se">Services</a>
-            </li>
-          </ul> -->
-
           <div class="navbar-buttons mbr-section-btn">
-            <a class="btn btn-primary display-4" href="{{ url('/') }}">Join Now</a>
+            <a class="btn btn-primary display-4" href="{{ url('/reservation') }}">Reserva</a>
           </div>
         </div>
       </div>
@@ -88,12 +72,12 @@
       <div class="row">
         <div class="content-wrap col-12 col-md-12">
           <h1 class="mbr-section-title mbr-fonts-style mbr-white mb-4 display-1">
-            <strong>Revolutionize Healthcare</strong>
+            <strong>Revolucionar la atención médica</strong>
           </h1>
-          <p class="mbr-fonts-style mbr-text mbr-white mb-4 display-7">Experience the Future of Clinical Registration
-            and Scheduling with Clinical Schedule</p>
+          <p class="mbr-fonts-style mbr-text mbr-white mb-4 display-7">Experimente el futuro del registro clínico
+            y Programación con Telemedicina</p>
           <div class="mbr-section-btn">
-            <a class="btn btn-white-outline display-7" href="https://mobiri.se">Join Us</a>
+            <a class="btn btn-white-outline display-7" href="{{ url('/reservation') }}">Reserva</a>
           </div>
         </div>
       </div>
@@ -109,129 +93,36 @@
           <div class="card-wrapper">
             <div class="card-content-text">
               <h3 class="card-title mbr-fonts-style mbr-white mt-3 mb-4 display-2">
-                <strong>Who We Are</strong>
+                <strong>Quienes somos</strong>
               </h3>
               <div class="row card-box align-left">
                 <div class="item features-without-image col-12">
                   <div class="item-wrapper">
 
-                    <p class="mbr-text mbr-fonts-style display-7">At TeleMedicina, we're not just another boring
-                      registration system. We're the disruptors of the healthcare industry, bringing innovation and
-                      efficiency to clinical processes.</p>
+                    <p class="mbr-text mbr-fonts-style display-7">En TeleMedicina no somos un aburrido más
+                      sistema de registro. Somos los disruptores de la industria de la salud, aportando innovación y
+                      eficiencia a los procesos clínicos.</p>
                   </div>
                 </div>
                 <div class="item features-without-image col-12">
                   <div class="item-wrapper">
 
-                    <p class="mbr-text mbr-fonts-style display-7">Our team of passionate individuals is dedicated to
-                      simplifying the complex world of clinical registration and scheduling, making your experience
-                      seamless and stress-free.</p>
+                    <p class="mbr-text mbr-fonts-style display-7">Nuestro equipo de personas apasionadas está dedicado a
+                      simplificando el complejo mundo del registro y la programación clínica, haciendo que su experiencia
+                      sin problemas y sin estrés.</p>
                   </div>
                 </div>
                 <div class="item features-without-image col-12">
                   <div class="item-wrapper">
 
-                    <p class="mbr-text mbr-fonts-style display-7">Join us on this exciting journey towards a brighter,
-                      healthier future with TeleMedicina by your side.</p>
+                    <p class="mbr-text mbr-fonts-style display-7">Únase a nosotros en este emocionante viaje hacia una vida más brillante,
+                      Un futuro más saludable con TeleMedicina a tu lado.</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="image-wrapper d-flex justify-content-center mt-3">
-              <img src="assets/images/photo-1609207825181-52d3214556dd.jpeg" alt="Mobirise Website Builder">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section data-bs-version="5.1" class="features03 cid-ucfBvxuCYJ px-6" id="news-1-ucfBvxuCYJ">
-
-
-    <div class="container-fluid">
-      <div class="row justify-content-center mb-5">
-        <div class="col-12 content-head">
-          <div class="mbr-section-head">
-            <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
-              <strong>Latest Updates &amp; News</strong>
-            </h4>
-
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="item features-image col-12 col-md-6 col-lg-3 active">
-          <div class="item-wrapper">
-            <div class="item-img mb-3">
-              <img src="assets/images/photo-1589554882513-691f8f071f72.jpeg" alt="Mobirise Website Builder" title="">
-            </div>
-            <div class="item-content align-left">
-              <h5 class="item-title mbr-fonts-style mt-0 mb-2 display-5">
-                <strong>New Features Unveiled for TeleMedicina</strong>
-              </h5>
-              <p class="mbr-text mbr-fonts-style mb-3 display-7">May 9, 2024</p>
-              <p class="mbr-text mbr-fonts-style mb-3 display-7">Discover the cutting-edge features that will
-                revolutionize how you manage clinical registrations and schedules.</p>
-              <div class="mbr-section-btn item-footer"><a href="" class="btn item-btn btn-primary display-7">Explore</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="item features-image col-12 col-md-6 col-lg-3">
-          <div class="item-wrapper">
-            <div class="item-img mb-3">
-              <img src="assets/images/photo-1524222928538-afb4409a0d70.jpeg" alt="Mobirise Website Builder" title=""
-                data-slide-to="1" data-bs-slide-to="1">
-            </div>
-            <div class="item-content align-left">
-              <h5 class="item-title mbr-fonts-style mb-2 mt-0 display-5">
-                <strong>TeleMedicina Partners with Top Hospitals</strong>
-              </h5>
-              <p class="mbr-text mbr-fonts-style mb-3 display-7">May 9, 2024</p>
-              <p class="mbr-text mbr-fonts-style mb-3 display-7">Exciting collaboration news! TeleMedicina joins forces
-                with leading hospitals to enhance healthcare services.</p>
-              <div class="mbr-section-btn item-footer">
-                <a href="" class="btn item-btn btn-primary display-7">Explore</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="item features-image col-12 col-md-6 col-lg-3">
-          <div class="item-wrapper">
-            <div class="item-img mb-3">
-              <img src="assets/images/photo-1612277795421-9bc7706a4a34.jpeg" alt="Mobirise Website Builder" title=""
-                data-slide-to="2" data-bs-slide-to="2">
-            </div>
-            <div class="item-content align-left">
-              <h5 class="item-title mbr-fonts-style mb-2 mt-0 display-5">
-                <strong>Stay Ahead with TeleMedicina Updates</strong>
-              </h5>
-              <p class="mbr-text mbr-fonts-style mb-3 display-7">May 9, 2024</p>
-              <p class="mbr-text mbr-fonts-style mb-3 display-7">Never miss a beat! Get the latest updates and
-                enhancements from TeleMedicina to stay at the forefront of healthcare technology.</p>
-              <div class="mbr-section-btn item-footer">
-                <a href="" class="btn item-btn btn-primary display-7">Explore</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="item features-image col-12 col-md-6 col-lg-3">
-          <div class="item-wrapper">
-            <div class="item-img mb-3">
-              <img src="assets/images/photo-1613377512507-92803ec4ef17.jpeg" alt="Mobirise Website Builder" title=""
-                data-slide-to="2" data-bs-slide-to="2">
-            </div>
-            <div class="item-content align-left">
-              <h5 class="item-title mbr-fonts-style mb-2 mt-0 display-5">
-                <strong>Join the TeleMedicina Community Today!</strong>
-              </h5>
-              <p class="mbr-text mbr-fonts-style mb-3 display-7">May 9, 2024</p>
-              <p class="mbr-text mbr-fonts-style mb-3 display-7">Connect with like-minded healthcare enthusiasts and
-                professionals. Let's revolutionize healthcare together!</p>
-              <div class="mbr-section-btn item-footer">
-                <a href="" class="btn item-btn btn-primary display-7">Explore</a>
-              </div>
+              <img src="{{asset('assets/images/photo-1609207825181-52d3214556dd.jpeg')}}" alt="dentist">
             </div>
           </div>
         </div>
@@ -305,12 +196,9 @@
   </section>
 
   <section data-bs-version="5.1" class="gallery07 cid-ucfBvxuUxy" id="gallery-14-ucfBvxuUxy">
-
-
     <div class="container-fluid gallery-wrapper">
       <div class="row justify-content-center">
         <div class="col-12 content-head">
-
         </div>
       </div>
       <div class="grid-container">
@@ -333,10 +221,6 @@
   </section>
 
   <section data-bs-version="5.1" class="article07 cid-ucfBvxxm3q" id="generic-text-7-ucfBvxxm3q">
-
-
-
-
     <div class="container">
       <div class="row justify-content-center">
         <div class="card col-md-12 col-lg-10">
@@ -375,9 +259,6 @@
   </section>
 
   <section data-bs-version="5.1" class="image05 cid-ucfBvxyzKJ" id="image-8-ucfBvxyzKJ">
-
-
-
     <div class="container">
       <div class="row ">
         <div class="col-12 col-lg-8">
@@ -396,10 +277,6 @@
   </section>
 
   <section data-bs-version="5.1" class="form1 cid-ucfBvxzP6o" id="call-to-action-12-ucfBvxzP6o">
-
-
-
-
     <div class="container">
       <div class="row content-wrapper justify-content-center">
         <div class="col-lg-10 mbr-form">

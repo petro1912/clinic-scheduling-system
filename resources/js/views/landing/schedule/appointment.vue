@@ -1,5 +1,5 @@
 <script setup>
-import { convertDateTime, getTimeRanges, requiredValidatorWithKey } from '@validators'
+import {convertDateTime, getTimeRanges, requiredValidatorWithKey} from '@validators'
 
 const props = defineProps({
   currentStep: {
@@ -28,13 +28,12 @@ const wdays = [
   'Monday',
   'Tuesday',
   'Wednesday',
-  'Thusday',
+  'Thursday',
   'Friday',
   'Saturday',                
 ]
 
 const getAvailableTimes = computed(() => {
-
   const service = scheduleDataLocal.value.service  
   const availability = scheduleDataLocal.value.availability
   const booked_date = scheduleDataLocal.value.booked_date 
@@ -42,19 +41,18 @@ const getAvailableTimes = computed(() => {
     return [] 
 
   const adays = availability.days.split(",")
-  const availableDays = adays.map(day => wdays.findIndex(it => day == it))
-  if (availableDays.length == 0)
+  const availableDays = adays.map(day => wdays.findIndex(it => day === it))
+  if (availableDays.length === 0)
     return []
 
-  if (availableDays.findIndex(it => it == new Date(booked_date).getDay()) == -1) {
+  if (availableDays.findIndex(it => it === new Date(booked_date).getDay()) === -1) {
     return []
   }
 
-  const scheduleOnDate = scheduleDataLocal.value.schedules.filter(item => item.booked_date == booked_date)
+  const scheduleOnDate = scheduleDataLocal.value.schedules.filter(item => item.booked_date === booked_date)
   let availableTimes =  getTimeRanges(availability.start_time, availability.end_time, service.duration)
 
   availableTimes = availableTimes.map(it => {
-    
     const range = it.split(" - ")
     const start_time = range[0] + ":00"
     const end_time = range[1] + ":00"
@@ -101,8 +99,8 @@ const nextStep = () => {
 
   console.log('data', data)
 
-  if (data.service == null || data.service == undefined) {
-    errorMsg.value = "You must select a service"
+  if (data.service == null) {
+    errorMsg.value = "You must select a service."
     isError.value = true
     
     return
@@ -118,9 +116,7 @@ const nextStep = () => {
 watch(() => props.currentStep, updateAddressData)
 
 const jumpToDate = val => {
-  const dateString = convertDateTime(val)
-
-  scheduleDataLocal.value.booked_date = dateString
+  scheduleDataLocal.value.booked_date = convertDateTime(val)
   emit('update:schedule-data', scheduleDataLocal.value)
 }
 </script>
@@ -243,9 +239,6 @@ const jumpToDate = val => {
 
 <style lang="scss">
 .personal-info-card {
-  padding-top: 3%;
-  padding-bottom: 3%;
-  padding-left: 6%;
-  padding-right: 6%;
+  padding: 3% 6%;
 }
 </style>

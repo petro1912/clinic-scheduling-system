@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,13 @@ class AvailabilityController extends Controller
     //
     public function getAvailability(Request $request)
     {
-        $doctor = Auth::user();
+        $doctor = User::where('role', 'doctor')->first();
+        if (!isset($doctor)){
+            return response()->json([
+                'message' => 'Please add doctor first in users menu.'
+            ], 400);
+        }
+
         $availability = Availability::where('user_id', $doctor->id)->first();
 
         return response()->json([
@@ -23,8 +30,13 @@ class AvailabilityController extends Controller
 
     public function updateAvailability(Request $request)
     {
+        $doctor = User::where('role', 'doctor')->first();
+        if (!isset($doctor)){
+            return response()->json([
+                'message' => 'Please add doctor first in users menu.'
+            ], 400);
+        }
 
-        $doctor = Auth::user();
         $availability = Availability::where('user_id', $doctor->id)->first();
         if ($availability == null) {
             $availability = new Availability();

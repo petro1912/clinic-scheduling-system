@@ -129,11 +129,11 @@ onMounted(() => {
 
             <tbody v-if="services">
               <tr
-                v-for="item in services"
+                v-for="(item, index) in services"
                 :key="item.id"
               >
                 <td>
-                  {{ item.id }}
+                  {{ index + 1 }}
                 </td>
                 <td class="text-center">
                   {{ item.name }}
