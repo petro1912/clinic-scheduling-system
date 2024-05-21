@@ -1,10 +1,18 @@
-# vue
+# Clinic registration and online scheduling system
 
-This template should help get you started developing with Vue 3 in Vite.
+This is the source code of clinical registration system with scheduling. It is built by Laravel and Vue.js with Vuexy theme.
 
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur).
+
+## Key Features
+
+- Check services and availability
+- Schedule to clinic
+- Payment with Transbank
+- Upload basic health documentation
+- Mail with Zoom Meeting link- 
 
 ## Type Support for `.vue` Imports in TS
 
@@ -17,6 +25,16 @@ However, if you wish to get actual prop types in `.vue` imports (for example to 
 See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
+
+Please install mysql server and create database.(Please refer .env file)
+
+Run Laravel local server with following commands.
+```sh
+composer install
+php artisan generate
+php artisan migrate
+php artisan serve
+```
 
 ```sh
 npm install
